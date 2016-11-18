@@ -22,4 +22,5 @@ while goNext:
             print('close', addr)
             break
         conn.send(data)
+        # break # для прохода мультпиоточного. обманка
     conn.close()
