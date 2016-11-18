@@ -7,3 +7,5 @@ Remote server via terminal. User box
     git clone https://github.com/takzhanov/stepic-web-tech.git /home/box/web
     cd /home/box/web/
     . ./init.sh
+
+2) https://stepik.org/s/w1vQV0qj
