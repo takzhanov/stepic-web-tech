@@ -1,3 +1,6 @@
 local-*
 nohup.out
 test.py
+.idea/
+*.iml
+*.pyc
