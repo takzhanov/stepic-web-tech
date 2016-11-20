@@ -1,6 +1,6 @@
 local-*
 nohup.out
 test.py
-.idea/
+.idea
 *.iml
 *.pyc
