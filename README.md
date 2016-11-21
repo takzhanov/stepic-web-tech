@@ -6,9 +6,9 @@ Remote server via terminal. User box
     git clone https://github.com/takzhanov/stepic-web-tech.git /home/box/web \
         && cd web
     # . ./prep-env.sh #change manually
-    cd /home/box/web/
     . ./init.sh
 
+    # change settings.py Debug=False, ALLOWED_HOSTS=['*']
     curl http://localhost/hello?sd=ds
     curl http://localhost/question/324      
 
