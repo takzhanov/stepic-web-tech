@@ -2,8 +2,7 @@
 Tasks for Web-tech course on Stepic.org https://stepik.org/s/n1ByvdqO
 
 Remote server via terminal. User box
-    sudo pip3 install django gunicorn
-    # поправить файлы gunicorn https://github.com/fedorch/stepic_web_project/blob/master/python3.md
+    . ./prep-env.sh
     git clone https://github.com/takzhanov/stepic-web-tech.git /home/box/web
     cd /home/box/web/
     . ./init.sh
