@@ -5,3 +5,6 @@ sudo pip3 install django gunicorn
 sudo sed -i 's/bin\/python/bin\/python3/g' /usr/sbin/gunicorn*
 sudo sed -i 's/bin\/python/bin\/python3/g' /usr/bin/gunicorn*
 sudo sed -i 's/17.5/19.6/g' /usr/bin/gunicorn*
+
+sed -i 's/DEBUG = True/DEBUG = False/g' /home/box/web/ask/ask/settings.py
+sed -i 's/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \['\''\*'\''\]/g' /home/box/web/ask/ask/settings.py
