@@ -1,4 +1,4 @@
-test.py
+*.sqlite3
 .idea
 *.iml
 *.pyc

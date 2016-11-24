@@ -16,9 +16,11 @@ sudo /etc/init.d/gunicorn restart
 #db
 #sudo /etc/init.d/mysql start
 #mysql -u root -p < create-db.sh
-cd ask
+cd /home/box/web/ask
+#sqlite3 ask.sqlite3
 python3 manage.py migrate auth
-python3 manage.py migrate --run-syncdb
+python3 manage.py makemigrations
+python3 manage.py migrate
 cd -
 
 #manual
