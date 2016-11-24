@@ -5,7 +5,7 @@ Tasks for Web-tech course on Stepic.org https://stepik.org/s/n1ByvdqO
 Remote server via terminal. User box
     git clone https://github.com/takzhanov/stepic-web-tech.git /home/box/web \
         && cd web
-    # . ./prep-env.sh #change manually
+    . ./prep-env.sh #change manually
     . ./init.sh
 
     # change settings.py Debug=False, ALLOWED_HOSTS=['*']
