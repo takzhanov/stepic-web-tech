@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'qa'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,8 +75,16 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'NAME': os.path.join(BASE_DIR, 'ask.sqlite3'),
+    },
+    # 'reserve': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'ask',
+    #     'USER': 'ask',
+    #     'PASSWORD': 'ask',
+    #     'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
 }
 
 # Internationalization

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Model
+from django.db.models import Model, Count
 
 
 class Question(Model):
@@ -8,8 +8,8 @@ class Question(Model):
     text = models.TextField()
     added_at = models.DateTimeField()
     rating = models.IntegerField()
-    author = models.ForeignKey(User)
-    likes = models.ManyToManyField(User, on_delete=models.SET_NULL)
+    author = models.ForeignKey(User, related_name='author')
+    likes = models.ManyToManyField(User)
 
 
 class Answer(Model):
@@ -21,7 +21,7 @@ class Answer(Model):
 
 class QuestionManager(models.Manager):
     def new(self):
-        Question()
+        return (self.order_by('-added_at'))
 
     def popular(self):
-        []
+        return (self.annotate(num_likes=Count('likes')).order_by('num_likes'))

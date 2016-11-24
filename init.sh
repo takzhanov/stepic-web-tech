@@ -14,4 +14,12 @@ sudo ln -sf /home/box/web/etc/ask-gunicorn.conf   /etc/gunicorn.d/ask.py
 sudo /etc/init.d/gunicorn restart
 
 #db
-sudo /etc/init.d/mysql start
+#sudo /etc/init.d/mysql start
+#mysql -u root -p < create-db.sh
+cd ask
+python3 manage.py migrate auth
+python3 manage.py migrate --run-syncdb
+cd -
+
+#manual
+#manage.py syncdb
