@@ -4,6 +4,14 @@ from django.db.models import Model, Count
 from django.utils import timezone
 
 
+class QuestionManager(models.Manager):
+    def new(self):
+        return (self.order_by('-added_at'))
+
+    def popular(self):
+        return (self.annotate(num_likes=Count('likes')).order_by('num_likes'))
+
+
 class Question(Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
@@ -11,6 +19,7 @@ class Question(Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, related_name='author')
     likes = models.ManyToManyField(User)
+    objects = QuestionManager()
 
 
 class Answer(Model):
@@ -18,11 +27,3 @@ class Answer(Model):
     added_at = models.DateTimeField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User)
-
-
-class QuestionManager(models.Manager):
-    def new(self):
-        return (self.order_by('-added_at'))
-
-    def popular(self):
-        return (self.annotate(num_likes=Count('likes')).order_by('num_likes'))
