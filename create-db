@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS ask;
+DROP USER ask@localhost;
+CREATE USER ask@localhost IDENTIFIED BY 'ask';
+GRANT ALL ON ask.* TO ask@localhost;
+FLUSH PRIVILEGES;
+exit
