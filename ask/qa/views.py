@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
@@ -12,12 +13,22 @@ def test(request, *args, **kwargs):
 
 def new(request, *args, **kwargs):
     questions = QuestionManager.new(Question.objects)
-    return render_to_response("questions.html", locals())
+    limit = request.GET.get('limit', 10)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(questions, limit)
+    paginator.baseurl = '/?page='
+    page = paginator.page(page)  # Page
+    return render_to_response('questions.html', locals())
 
 
 def popular(request, *args, **kwargs):
     questions = QuestionManager.popular(Question.objects)
-    return render_to_response("questions.html", locals())
+    limit = request.GET.get('limit', 10)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(questions, limit)
+    paginator.baseurl = '/popular/?page='
+    page = paginator.page(page)  # Page
+    return render_to_response('questions.html', locals())
 
 
 def question(request, id):
