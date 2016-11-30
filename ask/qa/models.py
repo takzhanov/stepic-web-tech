@@ -21,6 +21,9 @@ class Question(Model):
     likes = models.ManyToManyField(User)
     objects = QuestionManager()
 
+    def get_url(self):
+        return '/question/' + str(self.id)
+
 
 class Answer(Model):
     text = models.TextField()

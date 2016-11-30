@@ -1,0 +1,11 @@
+<html>
+<body>
+<h1>{{q.title}}</h1>
+<div>
+    {{q.text}}
+</div>
+{% for a in answers %}
+<div>{{a.id}} <br> {{a.text}}</div>
+{% endfor %}
+</body>
+</html>
