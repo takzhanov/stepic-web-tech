@@ -15,7 +15,7 @@ class QuestionManager(models.Manager):
 class Question(Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    added_at = models.DateTimeField(default=timezone.now(), null=True)
+    added_at = models.DateTimeField(default=timezone.now, null=True)
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, related_name='author')
     likes = models.ManyToManyField(User)
@@ -23,6 +23,9 @@ class Question(Model):
 
     def get_url(self):
         return '/question/' + str(self.id)
+
+    def __str__(self):
+        return '(id=' + str(self.id) + ', added_at=' + str(self.added_at)
 
 
 class Answer(Model):
