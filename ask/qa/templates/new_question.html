@@ -1,20 +1,10 @@
 <html>
 <body>
-<h1>{{q.title}}</h1>
-<div>
-    {{q.text}}
-</div>
-{% for a in answers %}
-<div>{{a.id}} <br> {{a.text}}</div>
-{% endfor %}
-
-<br/>
 
 {% for e in form.non_field_errors %}
 <div class="alert alert-danger">{{ e }}</div>
 {% endfor %}
-
-<form class="form-horizontal" method="post" action="/">
+<form class="form-horizontal" method="post" action="/ask/">
     {% csrf_token %}
     <fieldset>
         {% for field in form %}
@@ -27,7 +17,7 @@
     </fieldset>
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">
-            Добавить ответ
+            Сохранить
         </button>
     </div>
 </form>

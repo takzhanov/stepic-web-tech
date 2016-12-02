@@ -21,10 +21,10 @@ from qa import views
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.new, name='index'),
-    url(r'^login', views.test, name='index'),
-    url(r'^signup', views.test, name='index'),
+    url(r'^login/', views.test, name='index'),
+    url(r'^signup/', views.test, name='index'),
     url(r'^question/(?P<id>\d+)/$', views.question, name='question'),
-    url(r'^ask', views.test, name='index'),
+    url(r'^ask/', views.new_question, name='new_question'),
     url(r'^popular/', views.popular, name='index'),
     url(r'^new/', views.new, name='index'),
     url(r'^time/$', views.time),

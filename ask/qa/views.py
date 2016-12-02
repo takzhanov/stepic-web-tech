@@ -3,7 +3,9 @@ import datetime
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+from django.shortcuts import render_to_response, render
+from qa import forms
 from qa.models import Question, Answer, QuestionManager
 
 
@@ -35,9 +37,32 @@ def question(request, id):
     try:
         q = Question.objects.get(id=id)
         answers = Answer.objects.filter(question=q)
+        if request.method == "POST":
+            form = forms.AnswerForm(request.POST)
+            form.question = q
+            if form.is_valid():
+                new_answer = form.save()
+                url = q.get_url()
+                return HttpResponseRedirect(url)
+        else:
+            form = forms.AnswerForm(request.POST)
     except Question.DoesNotExist:
         raise Http404
     return render_to_response('question.html', locals())
+
+
+def new_question(request):
+    if request.method == "POST":
+        form = forms.AskForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            url = question.get_url()
+            return HttpResponseRedirect(url)
+    else:
+        form = forms.AskForm()
+    return render(request, 'new_question.html', {
+        'form': form
+    })
 
 
 def time(request, *args, **kwargs):
