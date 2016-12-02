@@ -46,7 +46,7 @@ def question(request, id):
                 url = q.get_url()
                 return HttpResponseRedirect(url)
         else:
-            form = forms.AnswerForm(request.POST)
+            form = forms.AnswerForm(initial={'question': q})
     except Question.DoesNotExist:
         raise Http404
     return render(request, 'question.html', locals())
