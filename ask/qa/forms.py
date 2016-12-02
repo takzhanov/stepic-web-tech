@@ -6,10 +6,10 @@ class AskForm(forms.ModelForm):
     class Meta:
         model = models.Question
         fields = ['title', 'text', 'author']
-        #
-        # def clean(self):
-        #     return 1
-        #
+
+        def clean(self):
+            return self.cleaned_data
+
         # def save(self):
         #     return 1
 
