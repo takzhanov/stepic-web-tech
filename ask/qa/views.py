@@ -39,16 +39,17 @@ def question(request, id):
         answers = Answer.objects.filter(question=q)
         if request.method == "POST":
             form = forms.AnswerForm(request.POST)
-            form.question = q
             if form.is_valid():
-                new_answer = form.save()
+                new_answer = form.save(commit=False)
+                new_answer.question = q
+                new_answer.save()
                 url = q.get_url()
                 return HttpResponseRedirect(url)
         else:
             form = forms.AnswerForm(request.POST)
     except Question.DoesNotExist:
         raise Http404
-    return render_to_response('question.html', locals())
+    return render(request, 'question.html', locals())
 
 
 def new_question(request):
