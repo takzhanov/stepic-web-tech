@@ -41,7 +41,7 @@ def question(request, id):
             form = forms.AnswerForm(request.POST)
             if form.is_valid():
                 new_answer = form.save(commit=False)
-                new_answer.question = q
+                # new_answer.question = q
                 new_answer.save()
                 url = q.get_url()
                 return HttpResponseRedirect(url)

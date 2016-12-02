@@ -17,7 +17,7 @@ class AskForm(forms.ModelForm):
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = models.Answer
-        fields = ['text', 'author']
+        fields = ['text', 'question', 'author']
 
         # def clean(self):
         #     return 1
