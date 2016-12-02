@@ -22,7 +22,7 @@ class Question(Model):
     objects = QuestionManager()
 
     def get_url(self):
-        return '/question/' + str(self.id)
+        return '/question/' + str(self.id) + '/'
 
     def __str__(self):
         return '(id=' + str(self.id) + ', added_at=' + str(self.added_at)
