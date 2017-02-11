@@ -32,4 +32,4 @@ class Answer(Model):
     text = models.TextField()
     added_at = models.DateTimeField(null=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(User, null=True)

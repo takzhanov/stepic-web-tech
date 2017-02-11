@@ -7,11 +7,15 @@ class AskForm(forms.ModelForm):
         model = models.Question
         fields = ['title', 'text', 'author']
 
-        def clean(self):
-            return self.cleaned_data
+    def clean(self):
+        return self.cleaned_data
 
-            # def save(self):
-            #     return 1
+        # def save(self):
+        #     return 1
+
+    def __init__(self, *args, **kwargs):
+        super(AskForm, self).__init__(*args, **kwargs)
+        self.fields['author'].required = False
 
 
 class AnswerForm(forms.ModelForm):
@@ -19,7 +23,11 @@ class AnswerForm(forms.ModelForm):
         model = models.Answer
         fields = ['text', 'question', 'author']
 
-        def clean(self):
-            return self.cleaned_data
-            # def save(self):
-            #     return 1
+    def clean(self):
+        return self.cleaned_data
+        # def save(self):
+        #     return 1
+
+    def __init__(self, *args, **kwargs):
+        super(AnswerForm, self).__init__(*args, **kwargs)
+        self.fields['author'].required = False
