@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from qa import forms
 from qa.models import Question, Answer, QuestionManager
-
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 def test(request, *args, **kwargs):
     return HttpResponse('test')
@@ -39,6 +40,7 @@ def question(request, id):
         answers = Answer.objects.filter(question=q)
         if request.method == "POST":
             form = forms.AnswerForm(request.POST)
+            form.author = request.user
             if form.is_valid():
                 new_answer = form.save(commit=False)
                 # new_answer.question = q
@@ -55,6 +57,7 @@ def question(request, id):
 def new_question(request):
     if request.method == "POST":
         form = forms.AskForm(request.POST)
+        form.author = request.user
         if form.is_valid():
             question = form.save()
             url = question.get_url()
@@ -69,3 +72,50 @@ def new_question(request):
 def time(request, *args, **kwargs):
     html = '<html><body>Time is %s</body></html>' % datetime.datetime.now()
     return HttpResponse(html)
+
+
+def signup(request):
+    if request.method == "POST":
+        form = forms.SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = forms.SignupForm()
+    return render(request, 'signup.html', {
+        'form': form
+    })
+
+
+def login_view(request):
+    if request.method == "POST":
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            dbuser = User.objects.get(username=username)
+            print(dbuser.password)
+            print(password)
+            print(dbuser.check_password(password))
+            print(username, password)
+            user = authenticate(username=username, password=password)
+            print(type(user))
+            print(authenticate(username='tt', password='tt'))
+            if user is not None:
+                login(request, user)
+                # Redirect to a success page.
+                return HttpResponseRedirect('/')
+            else:
+                # Return an 'invalid login' error message.
+                return render(request, 'login.html', {
+                    'form': form,
+                    'invalid': True
+                })
+    else:
+        form = forms.LoginForm()
+    return render(request, 'login.html', {
+        'form': form
+    })
+
